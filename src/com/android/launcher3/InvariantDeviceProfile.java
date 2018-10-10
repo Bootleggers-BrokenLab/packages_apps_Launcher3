@@ -86,6 +86,9 @@ public class InvariantDeviceProfile implements SharedPreferences.OnSharedPrefere
 
     private static final float ICON_SIZE_DEFINED_IN_APP_DP = 48;
 
+    public static final String KEY_SHOW_DESKTOP_LABELS = "pref_desktop_show_labels";
+    public static final String KEY_SHOW_DRAWER_LABELS = "pref_drawer_show_labels";
+
     // Constants that affects the interpolation curve between statically defined device profile
     // buckets.
     private static final float KNEARESTNEIGHBOR = 3;
@@ -177,10 +180,14 @@ public class InvariantDeviceProfile implements SharedPreferences.OnSharedPrefere
 
     @TargetApi(23)
     private InvariantDeviceProfile(Context context) {
+        mContext = context;
+
+        SharedPreferences prefs = Utilities.getPrefs(context);
+        prefs.registerOnSharedPreferenceChangeListener(this);
         String gridName = getCurrentGridName(context);
         String newGridName = initGrid(context, gridName);
         if (!newGridName.equals(gridName)) {
-            Utilities.getPrefs(context).edit().putString(KEY_IDP_GRID_NAME, newGridName).apply();
+            prefs.edit().putString(KEY_IDP_GRID_NAME, newGridName).apply();
         }
         new DeviceGridState(this).writeToPrefs(context);
 
@@ -204,6 +211,9 @@ public class InvariantDeviceProfile implements SharedPreferences.OnSharedPrefere
             SystemUiProxy.INSTANCE.get(mContext).setTaskbarEnabled(enabled);
 
             onConfigChanged(mContext, true);
+        }
+        if (KEY_SHOW_DESKTOP_LABELS.equals(key) || KEY_SHOW_DRAWER_LABELS.equals(key)) {
+            onConfigChanged(mContext);
         }
     }
 
