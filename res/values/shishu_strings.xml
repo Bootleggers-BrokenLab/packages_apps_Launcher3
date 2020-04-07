@@ -22,4 +22,7 @@
     <!-- Application name -->
     <string name="app_name">Shishu 家 Launcher</string>
 
+    <!-- All apps folder name -->
+    <string name="google_folder_title">Google</string>
+
 </resources>
