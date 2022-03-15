@@ -246,6 +246,11 @@ public class TaskOverlayFactory implements ResourceBasedOverride {
             overviewPanel.initiateSplitSelect(mThumbnailView.getTaskView());
         }
 
+        private void clearAllTasks() {
+            final RecentsView recentsView = mThumbnailView.getTaskView().getRecentsView();
+            recentsView.dismissAllTasks();
+        }
+
         /**
          * Called when the overlay is no longer used.
          */
@@ -340,12 +345,19 @@ public class TaskOverlayFactory implements ResourceBasedOverride {
             }
 
             @SuppressLint("NewApi")
+            @Override
             public void onScreenshot() {
                 endLiveTileMode(() -> saveScreenshot(mTask));
             }
 
+            @Override
             public void onSplit() {
                 endLiveTileMode(TaskOverlay.this::enterSplitSelect);
+            }
+
+            @Override
+            public void onClearAllTasksRequested() {
+                endLiveTileMode(TaskOverlay.this::clearAllTasks);
             }
         }
     }
@@ -360,5 +372,7 @@ public class TaskOverlayFactory implements ResourceBasedOverride {
 
         /** User wants to start split screen with current app. */
         void onSplit();
+
+        void onClearAllTasksRequested();
     }
 }
