@@ -159,6 +159,8 @@ public final class Utilities {
     public static final boolean IS_DEBUG_DEVICE =
             Build.TYPE.toLowerCase(Locale.ROOT).equals("eng");
 
+    public static final String KEY_RECENTS_MEMINFO = "pref_recents_meminfo";
+
     /**
      * Returns true if theme is dark.
      */
@@ -989,4 +991,9 @@ public final class Utilities {
         final KeyguardManager keyguardManager = context.getSystemService(KeyguardManager.class);
         return keyguardManager != null && keyguardManager.isKeyguardSecure();
     }
+
+    public static boolean isShowMeminfo(Context context) {
+        SharedPreferences prefs = getPrefs(context.getApplicationContext());
+        return prefs.getBoolean(KEY_RECENTS_MEMINFO, false);
+   }
 }
