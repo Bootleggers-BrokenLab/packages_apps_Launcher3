@@ -16,6 +16,23 @@
       "message": "Launcher crashed",
       "revId": "2d09637a7fbc7092e8722b6cce6883388d4d8910",
       "serverId": "5a64c7d2-d220-4cff-a215-87a09ee22948"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "398a99b1_3c78af59",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000006
+      },
+      "writtenOn": "2022-09-07T22:57:21Z",
+      "side": 1,
+      "message": "Maybe need to try to rebuild launcher\nhttps://stackoverflow.com/a/24994365",
+      "revId": "2d09637a7fbc7092e8722b6cce6883388d4d8910",
+      "serverId": "5a64c7d2-d220-4cff-a215-87a09ee22948"
     }
   ]
 }
